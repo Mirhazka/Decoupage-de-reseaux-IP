@@ -14,31 +14,31 @@ Chaque sous-réseau seront de taille symétrique et devra au moins accueillir 50
 Pour calculer l'adresse de début et de fin, il faut faire attention à ne pas faire qu'une simple addition. Par exemple si le début est à 172.16.1.65, pour avoir nos 62 adresses il faut faire +61 car nous avons déjà une adresse avec la 65!<br>
 ### Calcul du CIDR
 On calcul le CIDR en prenant le chiffre de la puissance, soit : 2^6 = 64, _cela permettra d'accueillir les 50 équipements sans oublier les adresses réseau et de broadcast_.<br>
-Ensuite, il faut enlever le nombre de bits hôte, soit : 64-6 = 58, cela donne un CIDR de /58.
+Ensuite, il faut enlever le nombre de bits hôte, soit : 32-6 = 26, cela donne un CIDR de /26.
 ### Découpage des sous-réseaux
   * Sous-réseau 1
 
 Adresse de réseau | Adresse de début | Adresse de fin | Adresse de broadcast
 --- | --- | --- | ---
-172.16.1.0/58 | 172.16.1.1 | 172.16.1.62 | 172.16.1.63
+172.16.1.0/26 | 172.16.1.1 | 172.16.1.62 | 172.16.1.63
 
   * Sous-réseau 2
 
 Adresse de réseau | Adresse de début | Adresse de fin | Adresse de broadcast
 --- | --- | --- | ---
-172.16.1.64/58 | 172.16.1.65 | 172.16.1.126 | 172.16.1.127
+172.16.1.64/26 | 172.16.1.65 | 172.16.1.126 | 172.16.1.127
 
   * Sous-réseau 3
 
 Adresse de réseau | Adresse de début | Adresse de fin | Adresse de broadcast
 --- | --- | --- | ---
-172.16.1.128/58 | 172.16.1.129 | 172.16.1.190 | 172.16.1.191
+172.16.1.128/26 | 172.16.1.129 | 172.16.1.190 | 172.16.1.191
 
   * Sous-réseau 4
 
 Adresse de réseau | Adresse de début | Adresse de fin | Adresse de broadcast
 --- | --- | --- | ---
-172.16.1.192/58 | 172.16.1.193 | 172.16.1.254 | 172.16.1.255
+172.16.1.192/26 | 172.16.1.193 | 172.16.1.254 | 172.16.1.255
 
 ## Découpage asymétrique
 Contrairement au découpage symétrique, où chaque plage d'adresse est identique en quantité, le découpage asymétrique a une d'adresse proportionnelle à la demande de chaque sous-réseau.
@@ -48,14 +48,14 @@ La méthode de calcul ne change pas, cependant nous devons calculé le CIDR pour
     * Besoin de 50 équipements
     * 2^6 = 64
     * 64-2 = 62 adresses disponibles pour ce réseau
-    * 64-6 = 58
-    * Ce sous-réseau a un CIDR /58
+    * 32-6 = 26
+    * Ce sous-réseau a un CIDR /26
   * Sous-réseau 2
     * Besoin de 12 équipements
     * 2^4 = 16
     * 16-2 = 14 adresses disponibles pour ce réseau
-    * 16-4 = 12
-    * Ce sous-réseau a un CIDR /12
+    * 32-4 = 28
+    * Ce sous-réseau a un CIDR /28
   * Sous-réseau 3
     * Besoin de 20 équipements
     * 2^5
@@ -76,7 +76,7 @@ Attention, lors d'un découpage asymétrique, il faut commencer avec le sous-ré
 
 Adresse de réseau | Adresse de début | Adresse de fin | Adresse de broadcast
 --- | --- | --- | ---
-172.16.1.0/58 | 172.16.1.1 | 172.16.1.62 | 172.16.1.63
+172.16.1.0/26 | 172.16.1.1 | 172.16.1.62 | 172.16.1.63
 
   * Sous-réseau 3
 
@@ -94,4 +94,4 @@ Adresse de réseau | Adresse de début | Adresse de fin | Adresse de broadcast
 
 Adresse de réseau | Adresse de début | Adresse de fin | Adresse de broadcast
 --- | --- | --- | ---
-172.16.1.128/12 | 172.16.1.129 | 172.16.1.142 | 172.16.1.143
+172.16.1.128/28 | 172.16.1.129 | 172.16.1.142 | 172.16.1.143
